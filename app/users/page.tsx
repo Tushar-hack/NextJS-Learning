@@ -8,10 +8,12 @@ interface User{
 const UsersPage = async () => {
 
   const res = await fetch('https://jsonplaceholder.typicode.com/users', {
-    cache : 'no-store'
+    next:{
+      revalidate: 10
+    }
   })
   /*
-    This will not store the data in cache.
+    This will store and fetch the data for every 10 minute (run a cron job). 
   */
   const users:User[] = await res.json();
   return (
